@@ -21,10 +21,10 @@
     {% block maintag %}<div role="main" class="main-ck">{% endblock %}
       <div id="content" class="container">
         {% block main_content %}
-          {% block flash %}
+           {% block flash %}
             <div class="flash-messages">
               {% block flash_inner %}
-                {% for message in h.flash.pop_messages() | list %}
+                {% for message in h.get_flashed_messages(with_categories=true) | list %} 
                   <div class="alert fade in {{ message.category }}">
                     {{ h.literal(message) }}
                   </div>
@@ -124,21 +124,21 @@
   making sitewide header changes it is preferable to override the footer.html-u
   file.
   #}
-  {%- block footer %}
+  {% block footer %}
     {% include "footer.html" %}
   {% endblock -%}
 {%- endblock -%}
 
 {%- block scripts %}
-    {% resource 'base/main' %}
+    {% asset 'base/main' %}
     
-    {% resource 'base/ckan' %}
+    {% asset 'base/ckan' %}
 
     {% if g.tracking_enabled %}
-      {% resource 'base/tracking.js' %}
+      {% asset 'base/tracking.js' %}
     {% endif %}
 
-    {% resource 'ckanext-provbz/main' %}
+    {% asset 'provbz/base-js' %}
 
   {{ super() }}
 {% endblock -%}

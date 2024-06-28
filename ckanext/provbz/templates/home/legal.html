@@ -12,9 +12,9 @@
 
 {% block breadcrumb_content %}
     {% if locale == 'de' %}
-    	<li class="active">{% link_for _('Rechtliche Anmerkungen'), controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzlegal' %}</li>
+    	<li class="active">{% link_for _('Rechtliche Anmerkungen'), 'blueprints.provbzlegal' %}</li>
   	{% else %}
-		<li class="active">{% link_for _('Note Legali'), controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzlegal' %}</li>
+		<li class="active">{% link_for _('Note Legali'), 'blueprints.provbzlegal' %}</li>
   	{% endif %}
 {% endblock %}
 

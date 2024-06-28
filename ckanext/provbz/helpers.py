@@ -12,14 +12,15 @@ import ckan.lib.helpers as h
 import ckan.logic as logic
 from ckan.common import request
 
-from pylons import config
+from ckantoolkit import config
+# from ckan.common import CKANConfig as config
 
 from ckan.lib.i18n import get_lang
-from ckanext.multilang.model import PackageMultilang, TagMultilang
+# from ckanext.multilang.model import PackageMultilang, TagMultilang
 
 import ckanext.pages.db as db
 
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 
 log = logging.getLogger(__file__)
@@ -88,7 +89,7 @@ def get_news_preview(page):
         return pg_row
     else:
         return None
-
+'''
 def recent_updates(n):
     #
     # Return a list of the n most recently updated datasets.
@@ -102,7 +103,7 @@ def recent_updates(n):
 	
     try:
         search_results = logic.get_action('package_search')(context, data_dict)
-    except search.SearchError, e:
+    except search.SearchError as e:
         log.error('Error searching for recently updated datasets')
         log.error(e)
         search_results = {}
@@ -122,6 +123,7 @@ def recent_updates(n):
     log.debug('Updates:::::::::::::::::::::::  %r ' % search_results)
 	
     return search_results.get('results', [])
+    '''
 
 # this is a hack against ckan-2.4.0 (until 2.4.7)
 # Early 2.4.x versions don't have helpers.current_url() and rely

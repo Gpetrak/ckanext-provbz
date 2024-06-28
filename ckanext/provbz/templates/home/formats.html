@@ -12,9 +12,9 @@
 
 {% block breadcrumb_content %}
     {% if locale == 'de' %}
-    	 <li class="active">{% link_for _('Liste der offenen Formattypen'), controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzformats' %}</li>
+    	 <li class="active">{% link_for _('Liste der offenen Formattypen'), 'blueprints.provbzformats' %}</li>
   	{% else %}
-		 <li class="active">{% link_for _('Lista di formati di tipo aperto'), controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzformats' %}</li>
+		 <li class="active">{% link_for _('Lista di formati di tipo aperto'), 'blueprints.provbzformats' %}</li>
   	{% endif %}
 {% endblock %}
 

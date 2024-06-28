@@ -1,0 +1,12 @@
+provbz-css:
+  contents:
+    - styles/provbz.css
+  output: provbz/provbz.css
+  filters: cssrewrite
+
+base-js:
+  contents:
+    - scripts/base.js
+    - scripts/cookiechoices/cookiechoices.js
+  # filters: rjsmin
+  output: provbz/base.js

@@ -3,9 +3,9 @@
 {%- block meta -%}
   <meta charset="utf-8" />
   {% block meta_generator %}<meta name="generator" content="ckan {{ c.__version__ }}" />{% endblock %}
-  {#% block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %#}
+  {% block meta_viewport %}<meta name="viewport" content="width=device-width, initial-scale=1.0">{% endblock %}
 
-  <meta property="og:image" content="{{h.url('/', locale='default', qualified=true)[:-1]}}{{h.url_for_static('/images/logo/opendata_suedtirol_logo_600x315.png')}}"/>
+  {# <meta property="og:image" content="{{h.url('/', locale='default', qualified=true)[:-1]}}{{h.url_for_static('/images/logo/opendata_suedtirol_logo_600x315.png')}}"/> #}
 
 {%- endblock -%}
 
@@ -17,7 +17,9 @@
 
 {% block styles %}
    {{ super() }}
-   <link rel="stylesheet" href="/css/provbz.css" type="text/css">
+   <link rel="stylesheet" href="/styles/provbz.css" type="text/css">
+   {#{% asset 'provbz/provpz' %} #}
+   <link rel="shortcut icon" href="/favicon.ico" />
 {% endblock %}
 
 {% block breadcrumb_content %} {% endblock %}

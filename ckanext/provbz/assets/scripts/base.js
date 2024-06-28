@@ -60,12 +60,12 @@ $(document).ready(function(){
       var locale = $('html').attr('lang');
       var messages = locales.i18n[locale];
 
-      cookieChoices.showCookieConsentBar(
-          messages.cookieMsg,
-          messages.cookieAccept, 
-          messages.cookieMoreInfo, 
-          messages.cookieInfoPage
-      );
+      //cookieChoices.showCookieConsentBar(
+      //   messages.cookieMsg,
+      //    messages.cookieAccept, 
+      //    messages.cookieMoreInfo, 
+      //    messages.cookieInfoPage
+      //);
     };
 
     cookiesConsentShow();

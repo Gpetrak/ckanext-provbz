@@ -3,7 +3,7 @@
 {% block header_wrapper %}
 
 {% block header_account %}
-  <!--header class="account-masthead">
+{# <!--header class="account-masthead">
     <div class="container">
       {% block header_account_container_content %}
         {% if c.userobj %}
@@ -62,7 +62,7 @@
         {% endif %}
       {% endblock %}
     </div>
-  </header-->
+  </header--> #}
   <div class="masthead masthead-top">
     <div class="container">
         <div class="content">
@@ -88,13 +88,14 @@
 
       {% block header_logo %}
         {% if g.site_logo %}
-          <!--a class="logo" href="{{ h.url('home') }}"><img src="{{ h.url_for_static(g.site_logo) }}" alt="{{ g.site_title }} Logo" title="{{ g.site_title }} Logo" /></a-->
-    		  <a id="logo" rel="Home" title="{{_(g.site_title)}}" href="{{ h.url('home') }}">
+        {#  <!--a class="logo" href="{{ h.url('home') }}"><img src="{{ h.url_for_static(g.site_logo) }}" alt="{{ g.site_title }} Logo" title="{{ g.site_title }} Logo" /></a--> #}
+         <a id="logo" rel="Home" title="{{_(g.site_title)}}" href="{{h.url_for('home')}}">
     			 <img src="{{h.url_for_static('/images/logo/opendata_suedtirol_logo.png')}}" alt="{{_(g.site_title)}}" title="{{_(g.site_title)}}"/>  
+    		  </a>  
     		  </a>
         {% else %}
           <h1>
-            <a href="{{ h.url('home') }}">{{ g.site_title }}</a>
+            <a href="{{ h.url_for('home') }}">{{ g.site_title }}</a>
           </h1>
           {% if g.site_description %}<h2>{{ g.site_description }}</h2>{% endif %}
         {% endif %}
@@ -110,20 +111,21 @@
           <nav class="section navigation">
             <ul class="nav nav-pills navbar">
               {% block header_site_navigation_tabs %}
-                {{ h.build_nav_main(
-                  ('search', _('Datasets')),
-                  ('organizations_index', _('Organizations')),
-                  ('group_index', _('Groups')),
-                  ('info', _('About')),
-                  ('faq', _('Faq'))
-                ) }}
+               {{ h.build_nav_main(
+                  ('dataset.search', _('Datasets')),
+                  ('organization.index', _('Organizations')),
+                  ('group.index', _('Groups')),
+                  ('blueprints.provbzinfo', _('About')),
+                  ('blueprints.provbzfaq', _('Faq'))
+                  ) }}
+
               {% endblock %}
             </ul>
           </nav>
         {% endblock %}
 
         {#% block header_site_search %}
-          <form class="section site-search simple-input" action="{% url_for controller='package', action='search' %}" method="get">
+          <form class="section site-search simple-input" action="{% url_for 'dataset.search' %}" method="get">
             <div class="field">
               <label for="field-sitewide-search">{{ _('Search Datasets') }}</label>
               <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search datasets...') }}" />

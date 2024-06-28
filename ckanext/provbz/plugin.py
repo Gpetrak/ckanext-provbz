@@ -1,13 +1,17 @@
 import logging
 
+from ckan.common import CKANConfig
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 
 import ckanext.provbz.helpers as helpers
 
-from ckan.lib.base import model
+from ckan import model
 
-import ckanext.dcatapit.interfaces as interfaces
+# For CKAN 2.10
+import ckanext.provbz.views as views
+
+# import ckanext.dcatapit.interfaces as interfaces
 
 from ckan.common import _, ungettext
 
@@ -31,11 +35,12 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     # ITemplateHelpers
     plugins.implements(plugins.ITemplateHelpers)
 
-    # IRoutes
-    plugins.implements(plugins.IRoutes)
+    # IRoutes (not available in CKAN 2.10)
+    # plugins.implements(plugins.IRoutes)
+    plugins.implements(plugins.IBlueprint)
 
     # ICustomSchema
-    plugins.implements(interfaces.ICustomSchema)
+    # plugins.implements(interfaces.ICustomSchema)
 
     # ITranslation
     if toolkit.check_ckan_version(min_version='2.5.0'):
@@ -90,17 +95,18 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     # Implementation of IConfigurer
     # ------------------------------------------------------------
 
-    def update_config(self, config):
+    def update_config(self, config: CKANConfig):
         toolkit.add_template_directory(config, 'templates')
         toolkit.add_public_directory(config, 'public')
-        toolkit.add_resource('public/base', 'ckanext-provbz')
+        toolkit.add_resource('assets', 'provbz') # path, webasset name
+        toolkit.add_public_directory(config, 'assets') # needed workaround to have webasset find files
 
     # Implementation of ITemplateHelpers
     # ------------------------------------------------------------
 
     def get_helpers(self):
         return {
-            'recent_updates': helpers.recent_updates,
+            # 'recent_updates': helpers.recent_updates,
             'get_default_locale': helpers.get_default_locale,
             'get_locale': helpers.get_locale,
             'getLocalizedPageLink': helpers.getLocalizedPageLink,
@@ -112,7 +118,11 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     # Implementation of IRoute
     # ------------------------------------------------------------
+    def get_blueprint(self):
+        return views.get_blueprints()
 
+    '''
+    # depracated for CKAN 2.10
     def before_map(self, map):
         map.connect('/privacy', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzprivacy')
         map.connect('/legal', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzlegal')
@@ -128,3 +138,4 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
         
     def after_map(self, route_map):
         return route_map
+    '''
