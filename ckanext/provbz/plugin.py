@@ -36,14 +36,13 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.ITemplateHelpers)
 
     # IRoutes (not available in CKAN 2.10)
-    # plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IBlueprint)
 
     # ICustomSchema
     # plugins.implements(interfaces.ICustomSchema)
 
     # ITranslation
-    if toolkit.check_ckan_version(min_version='2.5.0'):
+    if toolkit.check_ckan_version(min_version='2.10.4'):
         plugins.implements(plugins.ITranslation, inherit=True)
 
     # Implementation of ICustomSchema
@@ -120,22 +119,3 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     # ------------------------------------------------------------
     def get_blueprint(self):
         return views.get_blueprints()
-
-    '''
-    # depracated for CKAN 2.10
-    def before_map(self, map):
-        map.connect('/privacy', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzprivacy')
-        map.connect('/legal', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzlegal')
-        map.connect('faq', '/faq', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzfaq')
-        map.connect('info', '/info', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzinfo')
-        map.connect('/acknowledgements', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzacknowledgements')
-        map.connect('/formats', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='provbzformats')
-        
-        ## Used as utility end-point to manage cookies messages and the automatic locale setting
-        map.connect('/loc_status', controller='ckanext.provbz.controllers.provbz:PROVBZController', action='status')
-        
-        return map
-        
-    def after_map(self, route_map):
-        return route_map
-    '''
