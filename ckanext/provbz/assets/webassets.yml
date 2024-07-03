@@ -1,12 +1,18 @@
 provbz-css:
+  filters: cssrewrite
+  output: provbz/%(version)s_provbz.css
   contents:
     - styles/provbz.css
-  output: provbz/provbz.css
-  filters: cssrewrite
 
 base-js:
+  output: provbz/%(version)s_base.js
   contents:
     - scripts/base.js
     - scripts/cookiechoices/cookiechoices.js
-  # filters: rjsmin
-  output: provbz/base.js
+  extra:
+      preload:
+        - base/main
+        #- base/ckan
+  filters: rjsmin
+  
+
