@@ -221,7 +221,7 @@ body {
 }
 
 .hero {
-    background-image: url("../images/bg_intro.jpg");
+    background-image: url("/images/bg_intro.jpg");
 	background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -327,7 +327,7 @@ body {
 /*---------------- PROV-BZ's ckan CSS ---------------------*/
 
 .extended_search {
-    background-image: url("../images/bg-weiss-70.png");
+    background-image: url("/images/bg-weiss-70.png");
     margin-top: 10px;
     margin-bottom: 30px;
     margin-left: auto;
@@ -636,7 +636,7 @@ div.align-text th{
 }
 
 .geosolutions_logo {
-    background: url('../images/logo/GeoSolutions_logo.png') center  no-repeat;
+    background: url('/images/logo/GeoSolutions_logo.png') center  no-repeat;
 }
 
 /* Custom headers */
@@ -701,7 +701,7 @@ div.align-text th{
     padding-right: 8px;
     width: 32px;
     height: 32px;
-    background: url('../images/logo/170576_Logo_CIVIS_bz_it_RGB.svg') center no-repeat;
+    background: url('/images/logo/170576_Logo_CIVIS_bz_it_RGB.svg') center no-repeat;
     background-size: 100% auto;
 }
 
