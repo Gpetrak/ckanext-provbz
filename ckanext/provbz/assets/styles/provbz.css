@@ -220,14 +220,17 @@ body {
     background: #ffffff;
 }
 
+/*
+I defined this class in the layout1.html
+because otherwise, it doesn't load the image
 .hero {
     background-image: url("/images/bg_intro.jpg");
 	background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
-	/*height: 290px;*/
 	min-height: 290px;
 }
+*/
 
 .search-form {
     margin-bottom: 20px;
