@@ -29,7 +29,7 @@ Example:
 
 {% block package_item %}
   <li class="{{ item_class or "dataset-item" }}">
-    {# <div class="package-item-clickable" onClick="location.href='{{ h.url_for('dataset.read', id=package.name) }}'"> #}
+    <div class="package-item-clickable" onClick="location.href='{{ h.url_for('dataset.read', id=package.name) }}'">
     {% block content %}
       <div class="dataset-content">
         {% block heading %}
