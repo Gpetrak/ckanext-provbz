@@ -2,8 +2,8 @@
 {% set locale = h.get_locale() %}
 
 <div id="center-body">
-	<div role="main" class="hero">
-	  <div class="container">
+	<div class="hero" role="main">
+    	  <div class="container">
 		{% snippet 'home/snippets/search.html' %}
 	  </div>
 	</div>
@@ -100,31 +100,33 @@
   <div class="sponsor">
 	<div class="container container-home">
 	  <div class="row">
+
 		<div class="logos row">
-		  <a href="http://www.provincia.bz.it/{{ locale }}/" target="_blank" class="partners-logos">
+		  {# <a href="http://www.provincia.bz.it/{{ locale }}/" target="_blank" class="partners-logos col-md"> #}
+      <a href="http://www.provincia.bz.it/" target="_blank" class="partners-logos col-md">
 			 <img src="{{h.url_for_static('/images/logo/logo_pr.png')}}" alt="Provincia autonoma di Bolzano" class="img-responsive pr_bz" height="45">
 		  </a>
 
       {% if locale == 'de' %}
-        <a href="http://www.comune.bolzano.it/index_de.html" target="_blank" class="partners-logos">
+        <a href="http://www.comune.bolzano.it/index_de.html" target="_blank" class="partners-logos col-md">
       {% else %}
-        <a href="http://www.comune.bolzano.it/index_it.html" target="_blank" class="partners-logos">
+        <a href="http://www.comune.bolzano.it" target="_blank" class="partners-logos col-md">
       {% endif %}
        <img src="{{h.url_for_static('/images/logo/logo-bolzano.png')}}" alt="Comune di Bolzano" class="img-responsive consorzio_comuni" height="45">
       </a>
 
       {% if locale == 'de' %}
-		    <a href="http://www.gvcc.net/system/web/default.aspx?menuonr=218264968" target="_blank" class="partners-logos">
+		    <a href="http://www.gvcc.net/system/web/default.aspx?menuonr=218264968" target="_blank" class="partners-logos col-md">
       {% else %}
-        <a href="http://www.gvcc.net" target="_blank" class="partners-logos">
+        <a href="http://www.gvcc.net" target="_blank" class="partners-logos col-md">
       {% endif %}
 			 <img src="{{h.url_for_static('/images/logo/logo_cc.png')}}" alt="Consorzio dei Comuni di Bolzano" class="img-responsive consorzio_comuni" height="45">
 		  </a>
 
-      <a href="http://www.eurac.edu/{{ locale }}/pages/default.aspx" target="_blank" class="partners-logos">
+      <a href="http://www.eurac.edu/{{ locale }}/pages/default.aspx" target="_blank" class="partners-logos col-md">
        <img src="{{h.url_for_static('/images/logo/logo_EURAC.jpg')}}" alt="EURAC Research" class="img-responsive consorzio_comuni" height="45">
       </a>
-      <a href="http://www.sasabz.it/{{ locale }}/" target="_blank" class="partners-logos">
+      <a href="http://www.sasabz.it/{{ locale }}/" target="_blank" class="partners-logos col-md-3">
        <img src="{{h.url_for_static('/images/logo/logo_SASA.gif')}}" alt="SASA Bus" class="img-responsive consorzio_comuni" height="45">
       </a>
 		</div>

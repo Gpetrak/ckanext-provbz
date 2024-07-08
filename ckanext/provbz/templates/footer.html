@@ -2,8 +2,10 @@
 
 <footer class="site-footer">
   <div class="container ck-row-footer">
-    {% block footer_content %}	
-	  <div class="footer-left">
+    {% block footer_content %}
+	<div class="row">
+	  <!-- <div class="footer-left"> -->
+	  <div class="col-md-3 footer-links">
 		<nav class="footer-links">
 			{% block footer_nav %}
 			  <ul class="unstyled footer-lks">
@@ -88,7 +90,8 @@
 		</nav>	  
 	  </div>
 	  
-	  <div class="footer-center">	
+	  <!-- <div class="footer-center"> -->
+		<div class="col-md-3">	
 		<nav class="footer-links">	  
 			<ul class="unstyled">
 				{% block footer_links_ckan %}
@@ -107,7 +110,8 @@
 		</nav>
 	  </div>
 	  
-      <div class="attribution footer-right">
+      <!-- <div class="attribution footer-right"> -->
+		<div class="col-md-3 attribution">
         {#% block footer_attribution %}
           <p>{% trans %}<strong>Powered by</strong> <a class="hide-text ckan-footer-logo" href="http://ckan.org">CKAN</a>{% endtrans %}</p>
         {% endblock %#}
@@ -138,7 +142,7 @@
                 </li>
               {% endif %}
               <li>
-                <a href="{{ h.url_for(controller='user', action='read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
+                <a href="{{ h.url_for('user.read', id=c.userobj.name) }}" class="image" title="{{ _('View profile') }}">
                   {{ h.gravatar((c.userobj.email_hash if c and c.userobj else ''), size=22) }}
                   <span class="username">{{ c.userobj.display_name }}</span>
                 </a>
@@ -146,14 +150,14 @@
               {% set new_activities = h.new_activities() %}
               {#<li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
                 {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
-                <a href="{{ h.url_for('controller='user', action='dashboard'') }}" title="{{ notifications_tooltip }}">
+                <a href="{{ h.url_for('user.dashboard') }}" title="{{ notifications_tooltip }}">
                   <i class="icon-dashboard"></i>
                   <span>{{ new_activities }}</span>
                 </a>
               </li>#}
               {% block header_account_settings_link %}
                 <li>
-                  <a href="{{ h.url_for(controller='user', action='edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
+                  <a href="{{ h.url_for('user.edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
                     <i class="icon-cog"></i>
                   </a>
                 </li>
@@ -182,7 +186,7 @@
 	              {#% set came_from = h.get_request_param('came_from') %}
 			      {% set login_url = h.url_for(controller='ckanext.shibboleth.controller:ShibbolethController', action='shiblogin', came_from=came_from or '') %}
 			      {% set url = h.checkForShibboletURL(login_url) %}
-				  <li><i class="icon-lock"></i><a tabindex="1" href="{{ url }}">{{ _('ACCEDI AL GEOPORTALE') }}</a></li>#}
+				  <li><i class="icon-lock"></i><a tabindex="1" href="{{ url }}">{{ _('ACCEDI AL GEOPORTALE') }}</a></li>
 
                      {# <li>{% link_for _('Log in'), controller='user', action='login' %}</li>#}
                       <li><i class="icon-lock"></i>{% link_for _('ACCEDI AL GEOPORTALE'), controller='user', action='login' %}</li>
@@ -199,7 +203,7 @@
           {% snippet "snippets/language_selector.html" %}
         {% endblock %}
       </div>
-	  
+	</div>
     {% endblock %}
   </div>
 

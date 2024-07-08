@@ -281,14 +281,15 @@ body {
 	padding-right: 5px;
 }
 
+/*
+Instead of these classes in the footer
+we use the col-md class of bootstrap in CKAN
 .footer-left{
 	width: 300px;
 	float: left;
 }
 
 .footer-center{
-	/*width: 350px;
-	margin-left: 80px;*/
 	float: left;
 }
 
@@ -300,6 +301,7 @@ body {
 .footer-right nav > ul > li > i{
 	margin-right: 5px;
 }
+*/
 
 .logo_footer{
 	margin-bottom: 20px;
