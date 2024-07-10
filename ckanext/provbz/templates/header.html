@@ -112,7 +112,7 @@
             <ul class="nav nav-pills navbar">
               {% block header_site_navigation_tabs %}
                {{ h.build_nav_main(
-                  ('dataset.search', _('Datasets')),
+                  (dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type, 'main nav') or _('Datasets'), ["dataset", "resource"]),
                   ('organization.index', _('Organizations')),
                   ('group.index', _('Groups')),
                   ('blueprints.provbzinfo', _('About')),
