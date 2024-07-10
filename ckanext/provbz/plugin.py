@@ -105,7 +105,7 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
 
     def get_helpers(self):
         return {
-            # 'recent_updates': helpers.recent_updates,
+            'recent_updates': helpers.recent_updates,
             'get_default_locale': helpers.get_default_locale,
             'get_locale': helpers.get_locale,
             'getLocalizedPageLink': helpers.getLocalizedPageLink,

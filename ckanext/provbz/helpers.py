@@ -16,7 +16,7 @@ from ckantoolkit import config
 # from ckan.common import CKANConfig as config
 
 from ckan.lib.i18n import get_lang
-# from ckanext.multilang.model import PackageMultilang, TagMultilang
+from ckanext.multilang.model import PackageMultilang, TagMultilang
 
 import ckanext.pages.db as db
 
@@ -89,7 +89,7 @@ def get_news_preview(page):
         return pg_row
     else:
         return None
-'''
+
 def recent_updates(n):
     #
     # Return a list of the n most recently updated datasets.
@@ -123,7 +123,7 @@ def recent_updates(n):
     log.debug('Updates:::::::::::::::::::::::  %r ' % search_results)
 	
     return search_results.get('results', [])
-    '''
+
 
 # this is a hack against ckan-2.4.0 (until 2.4.7)
 # Early 2.4.x versions don't have helpers.current_url() and rely
