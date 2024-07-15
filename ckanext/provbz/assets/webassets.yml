@@ -8,11 +8,11 @@ base-js:
   output: provbz/%(version)s_base.js
   contents:
     - scripts/base.js
-    # - scripts/cookiechoices/cookiechoices.js
+    - scripts/cookiechoices/cookiechoices.js
   extra:
       preload:
         - base/main
-        #- base/tracking
+        # - base/tracking
   filters: rjsmin
   
 coockiechoices-js:

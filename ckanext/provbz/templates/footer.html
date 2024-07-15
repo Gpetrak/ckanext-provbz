@@ -189,10 +189,10 @@
 				  <li><i class="icon-lock"></i><a tabindex="1" href="{{ url }}">{{ _('ACCEDI AL GEOPORTALE') }}</a></li>
 
                      {# <li>{% link_for _('Log in'), controller='user', action='login' %}</li>#}
-                      <li><i class="icon-lock"></i>{% link_for _('ACCEDI AL GEOPORTALE'), controller='user', action='login' %}</li>
+                      <li><i class="icon-lock"></i>{% link_for _('ACCEDI AL GEOPORTALE'), 'user.login' %}</li>
 
 	              {# % if h.check_access('user_create') %}
-	                <li>{% link_for _('Register'), controller='user', action='register', class_='sub' %}</li>
+	                <li>{% link_for _('Register'), 'user.register', class_='sub' %}</li>
 	              {% endif % #}
               {% endblock %}
             </ul>

@@ -21,9 +21,9 @@ from ckanext.geonetwork.harvesters.geonetwork import GeoNetworkHarvester
 from ckanext.dcatapit.model.license import License
 from ckanext.dcatapit.harvesters.utils import get_controlled_vocabulary_values
 
-from ckanext.spatial.model import ISODocument
-from ckanext.spatial.model import ISOElement
-from ckanext.spatial.model import ISOKeyword
+from ckanext.spatial.harvested_metadata import ISODocument
+from ckanext.spatial.harvested_metadata import ISOElement
+from ckanext.spatial.harvested_metadata import ISOKeyword
 
 from ckanext.multilang.harvesters.multilang import ISOTextGroup
 
@@ -566,7 +566,7 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
                     self.persist_package_multilang_field(package_id, 'publisher_name', publisher.get('text'), publisher.get('locale'), 'extra') 
             
             pass
-        except Exception, e:
+        except Exception as e:
             log.error('Exception occurred while persisting DB objects: %s', e)
             raise
 
