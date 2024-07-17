@@ -10,7 +10,9 @@ import json
 from ckan import model
 from ckan.model import Session
 from ckan.model import Tag
-from ckan.common import c as C
+import ckan.model as model
+# from ckan.common import c as C
+from ckan.common import g, current_user
 
 from ckanext.multilang.model import PackageMultilang, TagMultilang
 
@@ -140,15 +142,25 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
         super_package_dicts = []
 
         # temp fix for c.userobj which is not attached to current session
-        from ckan.model import User
-        C.userobj = Session.query(User).filter_by(name=C.user).one()
+        # from ckan.model import User
+        # C.userobj = Session.query(User).filter_by(name=C.user).one()
+
+        # sets the g.user/g.userobj for extensions
+        # g.user = current_user.name
+        # g.userobj = '' if current_user.is_anonymous else current_user 
+        
+        # user = super(PBZHarvester, self)._get_user_name()
+        # harvest_object.context = {
+        #   'model': model,
+        #    'session': Session,
+        #    'user': user,
+        # }
 
         for cls in PBZHarvester.__bases__:
             c = cls()
-            
+
             if hasattr(c, 'source_config'):
                 c.source_config = self.source_config
-
             super_package_dicts.append(c.get_package_dict(iso_values, harvest_object))
 
             if hasattr(c, '_package_dict'):
@@ -227,7 +239,7 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
             dataset_themes = default_values.get('dataset_theme')
 
         # backward compatibility with {THEME} notation
-        if isinstance(dataset_themes, (str, unicode,)):
+        if isinstance(dataset_themes, str):
             dataset_themes = [{'theme': dt} for dt in dataset_themes.strip('{}').split(',')]
 
         log.info("Medatata harvested dataset themes: %r", dataset_themes)
@@ -257,14 +269,15 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
                 for entry in party["organisation-name-localized"]:
                     if entry['text'] and entry['locale'].lower()[1:]:
                         agent_code, organization_name = self.get_agent(entry['text'], default_values)
-
-                        if self._ckan_locales_mapping[entry['locale'].lower()[1:]]:
-                            self.localized_publisher.append({
-                                'text': organization_name or entry['text'],
-                                'locale': self._ckan_locales_mapping[entry['locale'].lower()[1:]]
-                            })
-                        else:
-                            log.warning('Locale Mapping not found for dataset publisher name, entry skipped!')
+                        # We conmment out this if for now because the entry['locale'] value is equal with CKAN's corresponing value
+                        # if self._ckan_locales_mapping[entry['locale'].lower()[1:]]:
+                        self.localized_publisher.append({
+                            'text': organization_name or entry['text'],
+                            # 'locale': self._ckan_locales_mapping[entry['locale'].lower()[1:]]
+                            'locale': entry['locale'].lower()[1:]
+                        })
+                        #else:
+                        #    log.warning('Locale Mapping not found for dataset publisher name, entry skipped!')
                     else:
                         log.warning('TextGroup data not available for dataset publisher name, entry skipped!')
 
@@ -314,13 +327,14 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
                     if entry['text'] and entry['locale'].lower()[1:]:
                         agent_code, organization_name = self.get_agent(entry['text'], default_values)
 
-                        if self._ckan_locales_mapping[entry['locale'].lower()[1:]]:
-                            self.localized_org.append({
-                                'text': organization_name or entry['text'],
-                                'locale': self._ckan_locales_mapping[entry['locale'].lower()[1:]]
-                            })
-                        else:
-                            log.warning('Locale Mapping not found for organization name, entry skipped!')
+                        # if self._ckan_locales_mapping[entry['locale'].lower()[1:]]:
+                        self.localized_org.append({
+                            'text': organization_name or entry['text'],
+                            # 'locale': self._ckan_locales_mapping[entry['locale'].lower()[1:]]
+                            'locale': entry['locale'].lower()[1:]
+                        })
+                        #else:
+                        #    log.warning('Locale Mapping not found for organization name, entry skipped!')
                     else:
                         log.warning('TextGroup data not available for organization name, entry skipped!')
 
@@ -407,9 +421,10 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
 
         for entry in iso_values["conformity-title-text"]:
             if entry['text'] and entry['locale'].lower()[1:]:
-                conforms_to_locale = self._ckan_locales_mapping[entry['locale'].lower()[1:]]
-                if self._ckan_locales_mapping[entry['locale'].lower()[1:]]:
-                    conforms_to['title'][conforms_to_locale] = entry['text']
+                # conforms_to_locale = self._ckan_locales_mapping[entry['locale'].lower()[1:]]
+                conforms_to_locale = entry['locale'].lower()[1:]
+                # if self._ckan_locales_mapping[entry['locale'].lower()[1:]]:
+                conforms_to['title'][conforms_to_locale] = entry['text']
         
         if conforms_to:
             package_dict['extras'].append({'key': 'conforms_to', 'value': json.dumps([conforms_to])})
@@ -431,7 +446,8 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
                 for entry in party["organisation-name-localized"]:
                     if entry['text'] and entry['locale'].lower()[1:]:
                         agent_code, organization_name = self.get_agent(entry['text'], default_values)
-                        creator_lang = self._ckan_locales_mapping[entry['locale'].lower()[1:]]
+                        # creator_lang = self._ckan_locales_mapping[entry['locale'].lower()[1:]]
+                        creator_lang = entry['locale'].lower()[1:]
                         if creator_lang:
                             creator['creator_name'][creator_lang] = organization_name or entry['text']
                 package_dict['extras'].append({'key': 'creator', 'value': json.dumps([creator])})
