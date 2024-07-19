@@ -29,6 +29,8 @@ from ckanext.spatial.harvested_metadata import ISOKeyword
 
 from ckanext.multilang.harvesters.multilang import ISOTextGroup
 
+from ckanext.dcatapit.schema import FIELD_THEMES_AGGREGATE
+
 log = logging.getLogger(__name__)
 
 class ISOCharacterSet(ISOElement):
@@ -145,20 +147,8 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
         # from ckan.model import User
         # C.userobj = Session.query(User).filter_by(name=C.user).one()
 
-        # sets the g.user/g.userobj for extensions
-        # g.user = current_user.name
-        # g.userobj = '' if current_user.is_anonymous else current_user 
-        
-        # user = super(PBZHarvester, self)._get_user_name()
-        # harvest_object.context = {
-        #   'model': model,
-        #    'session': Session,
-        #    'user': user,
-        # }
-
         for cls in PBZHarvester.__bases__:
             c = cls()
-
             if hasattr(c, 'source_config'):
                 c.source_config = self.source_config
             super_package_dicts.append(c.get_package_dict(iso_values, harvest_object))
@@ -243,7 +233,10 @@ class PBZHarvester(GeoNetworkHarvester, MultilangHarvester):
             dataset_themes = [{'theme': dt} for dt in dataset_themes.strip('{}').split(',')]
 
         log.info("Medatata harvested dataset themes: %r", dataset_themes)
-        package_dict['extras'].append({'key': 'theme', 'value': json.dumps(dataset_themes)})
+        # old format
+        # package_dict['extras'].append({'key': 'theme', 'value': json.dumps(dataset_themes)})
+        # this is the right one: We are not using the theme field anymore for internal use, since it's compeltely ahdled by DCAT, that sets it as a list of strings
+        package_dict['extras'].append({'key': FIELD_THEMES_AGGREGATE, 'value': json.dumps(dataset_themes)})
 
         # publisher
         # ##################

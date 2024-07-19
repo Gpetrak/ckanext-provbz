@@ -11,7 +11,7 @@ from ckan import model
 # For CKAN 2.10
 import ckanext.provbz.views as views
 
-# import ckanext.dcatapit.interfaces as interfaces
+import ckanext.dcatapit.interfaces as interfaces
 
 from ckan.common import _, ungettext
 
@@ -39,7 +39,7 @@ class PBZThemePlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IBlueprint)
 
     # ICustomSchema
-    # plugins.implements(interfaces.ICustomSchema)
+    plugins.implements(interfaces.ICustomSchema)
 
     # ITranslation
     if toolkit.check_ckan_version(min_version='2.10.4'):
