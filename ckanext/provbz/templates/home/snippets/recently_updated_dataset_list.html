@@ -3,7 +3,7 @@
 <div class="home-dataset-list">
    <h2>{% trans %}Ultimi dataset{% endtrans %}</h2>
    <div class="inner inner-ck">
-      <ul class="dataset-list unstyled">
+      <ul class="dataset-list list-unstyled">
          {% for dataset in datasets %}
             {% snippet 'snippets/package_item.html', package=dataset, truncate_title=80 %}
          {% endfor %}

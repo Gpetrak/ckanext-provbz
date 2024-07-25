@@ -8,7 +8,7 @@
 	  <div class="col-md-3 footer-links">
 		<nav class="footer-links">
 			{% block footer_nav %}
-			  <ul class="unstyled footer-lks">
+			  <ul class="list-unstyled footer-lks">
 				{% block footer_links %}
 				  {# <!--li><a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About {0}').format(g.site_title) }}</a></li--> #}
 				  <li>
@@ -69,7 +69,7 @@
 				{% endblock %}
 			  </ul>
 
-			  <ul class="unstyled copyrights">
+			  <ul class="list-unstyled copyrights">
 				  <li>
 					{% if locale == 'de' %}
 					  © 2015 Autonome Provinz Bozen - Südtiroler Informatik AG • Steuernummer: 00390090215 
@@ -93,7 +93,7 @@
 	  <!-- <div class="footer-center"> -->
 		<div class="col-md-3">	
 		<nav class="footer-links">	  
-			<ul class="unstyled">
+			<ul class="list-unstyled">
 				{% block footer_links_ckan %}
 				  {% set api_url = 'https://docs.ckan.org/en/2.10/api/index.html' %}
 
@@ -177,19 +177,19 @@
             <ul class="unstyled">
               {# % block header_account_notlogged %}
 			  <li><i class="icon-lock"></i>{% link_for _('ACCEDI AL GEOPORTALE'), controller='user', action='login' %}</li>
-              {% endblock % #}
+              {% endblock %}
             </ul>
           </nav--> #}
           <nav class="account not-authed">
             <ul class="unstyled">
               {% block header_account_notlogged %}
-	              {#% set came_from = h.get_request_param('came_from') %}
-			      {% set login_url = h.url_for(controller='ShibbolethController.shiblogin', came_from=came_from or '') %}
-			      {% set url = h.checkForShibboletURL(login_url) %}
-				  <li><i class="icon-lock"></i><a tabindex="1" href="{{ url }}">{{ _('ACCEDI AL GEOPORTALE') }}</a></li>
+	              {# { % set came_from = h.get_request_param('came_from') %}
+			      {% set login_url = h.url_for('ShibbolethController.shiblogin', came_from=came_from or '') %}
+			      {% set url = h.checkForShibboletURL(login_url) %} #}
+				  {# <li><i class="icon-lock"></i><a tabindex="1" href="{{ url }}">{{ _('ACCEDI AL GEOPORTALE') }}</a></li> #}
 
                      {# <li>{% link_for _('Log in'), controller='user', action='login' %}</li>#}
-                      <li><i class="icon-lock"></i>{% link_for _('ACCEDI AL GEOPORTALE'), 'user.login' %}</li>
+                      <li><i class="icon-lock"></i>{% link_for _('ACCEDI AL GEOPORTALE'), controller='user', action='login' %}</li>
 
 	              {# % if h.check_access('user_create') %}
 	                <li>{% link_for _('Register'), 'user.register', class_='sub' %}</li>
