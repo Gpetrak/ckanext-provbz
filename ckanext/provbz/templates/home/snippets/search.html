@@ -1,9 +1,10 @@
-{% set tags = h.get_facet_items_dict('tags', limit=8) %}
+{% set tags = h.get_facet_items_dict('tags', search_facets, limit=3) %}
 {% set placeholder = _('Cerca per...') %}
+{% set dataset_type = h.default_package_type() %}
 
 <div class="extended_search">
   <h1>{% trans %}Trova i dati che ti interessano{% endtrans %}</h1>
-  <form class="module-content search-form home-search-form" method="get" action="{% url_for('dataset.search') %}">
+  <form class="module-content search-form home-search-form" method="get" action="{% url_for dataset_type ~ '.search' %}">
     <legend>{% trans %}Cerca i dati e ottieni gli aggiornamenti per i dataset e le categorie a cui sei interessato{% endtrans %}</legend>
     <!--h3 class="heading">{{ _("Search Your Data") }}</h3-->
     <div class="search_field search-input control-group">
@@ -18,14 +19,10 @@
     <!--div class="tags home-tags"-->
     <!--h3>{{ _('Popular Tags') }}</h3-->
   	<h2>{% trans %}Tag maggiormente utilizzati{% endtrans %}</h2>	
-    <div class="text-center">
+    
   	{% for tag in tags %}
-  		<!--div class="btn-col">
-  		  <a class="btn-ck btn-block" href="{% url_for controller='package', action='search', tags=tag.name %}" title="{{ tag.display_name }}">{{ h.truncate(tag.display_name, 16) }}</a>
-  		</div-->
-        <!--a role="button" class="btn btn-primary small" href="{% url_for controller='package', action='search', tags=tag.name %}" title="{{ tag.display_name }}">{{ tag.display_name }}</a-->
-        <a role="button" class="btn-ck" href="{% url_for('dataset.search'), tags=tag.name %}" title="{{ tag.display_name }}">{{ h.truncate((tag.display_name), 50) }}</a>
+        <a role="button" class="btn-ck" href="{% url_for 'dataset.search', tags=tag.name %}" title="{{ tag.display_name }}">{{ tag.display_name|truncate(22) }}</a>
   	{% endfor %}	
-    </div>
+    
   </div>
 </div>

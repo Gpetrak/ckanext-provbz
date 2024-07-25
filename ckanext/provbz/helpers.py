@@ -12,8 +12,8 @@ import ckan.lib.helpers as h
 import ckan.logic as logic
 from ckan.common import request
 
-from ckantoolkit import config
-# from ckan.common import CKANConfig as config
+# from ckantoolkit import config
+from ckan.common import config
 
 from ckan.lib.i18n import get_lang
 from ckanext.multilang.model import PackageMultilang, TagMultilang

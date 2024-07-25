@@ -184,7 +184,7 @@
             <ul class="unstyled">
               {% block header_account_notlogged %}
 	              {#% set came_from = h.get_request_param('came_from') %}
-			      {% set login_url = h.url_for(controller='ckanext.shibboleth.controller:ShibbolethController', action='shiblogin', came_from=came_from or '') %}
+			      {% set login_url = h.url_for(controller='ShibbolethController.shiblogin', came_from=came_from or '') %}
 			      {% set url = h.checkForShibboletURL(login_url) %}
 				  <li><i class="icon-lock"></i><a tabindex="1" href="{{ url }}">{{ _('ACCEDI AL GEOPORTALE') }}</a></li>
 
