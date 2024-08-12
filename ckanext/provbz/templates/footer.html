@@ -13,55 +13,55 @@
 				  {# <!--li><a href="{{ h.url_for(controller='home', action='about') }}">{{ _('About {0}').format(g.site_title) }}</a></li--> #}
 				  <li>
 					  <a href={{ h.getLocalizedPageLink('info') }}>
-						  <i class="icon-comment footer_icon"></i>
+						  <i class="fa-solid fa-comment"></i>
 						  {% trans %}Informazioni Dati Alto Adige{% endtrans %}
 					  </a>
 				  </li>
 				  <li>
 					  <a href={{ h.getLocalizedPageLink('faq') }}>
-						  <i class="icon-question footer_icon"></i>
+						  <i class="fa-solid fa-question"></i>
 						  {% trans %}Domande frequenti{% endtrans %}
 					  </a>
 				  </li>
 				  <li>
 					  <a href="/revision/list?format=atom">
-						<i class="icon-rss footer_icon"></i> 
+						<i class="fa-solid fa-rss"></i> 
 						{% trans %}Atom Feed{% endtrans %}
 					  </a>
 				  </li>
 				  <li>
 					<a href={{ h.getLocalizedPageLink('acknowledgements') }}>
-					  <i class="icon-user footer_icon"></i>
+					  <i class="fa-solid fa-user"></i>
 					  {% trans %}Ringraziamenti{% endtrans %}
 					</a>
 				  </li>
 				  <li>
 					<a href={{ h.getLocalizedPageLink('legal') }}>
-					  <i class="icon-legal footer_icon"></i>
+					  <i class="fa-solid fa-gavel"></i>
 					  {% trans %}Note legali{% endtrans %}
 					</a>
 				  </li>
 				  <li>
 					<a href={{ h.getLocalizedPageLink('privacy') }}>
-					  <i class="icon-key footer_icon"></i>
+					  <i class="fa-solid fa-key"></i>
 					  {% trans %}Privacy{% endtrans %}
 					</a>
 				  </li>
 				  <li>
 					<a href="mailto:opendata@retecivica.bz.it">
-					  <i class="icon-share-alt footer_icon"></i>
+					  <i class="fa-solid fa-share"></i>
 					  {% trans %}Contattaci{% endtrans %}
 					</a>
 				  </li>
 				  <li>
 					{% if locale == 'de' %}
 						<a href="http://www.buergernetz.bz.it/de/cookie.asp" target="_blank">
-						  <i class="icon-bullseye footer_icon"></i>
+						  <i class="fa-solid fa-bullseye"></i>
 						  {% trans %}Cookie{% endtrans %}
 						</a>
 					{% else %}
 						<a href="http://www.retecivica.bz.it/it/cookie.asp" target="_blank">
-						  <i class="icon-bullseye footer_icon"></i>
+						  <i class="fa-solid fa-bullseye"></i>
 						  {% trans %}Cookie{% endtrans %}
 						</a>
 					{% endif %}
@@ -148,24 +148,24 @@
                 </a>
               </li>
               {% set new_activities = h.new_activities() %}
-              {#<li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
+              <li class="notifications {% if new_activities > 0 %}notifications-important{% endif %}">
                 {% set notifications_tooltip = ngettext('Dashboard (%(num)d new item)', 'Dashboard (%(num)d new items)', new_activities) %}
-                <a href="{{ h.url_for('user.dashboard') }}" title="{{ notifications_tooltip }}">
-                  <i class="icon-dashboard"></i>
+                <a href="{{ h.url_for('activity.dashboard') }}" title="{{ notifications_tooltip }}">
+                  <i class="fa-solid fa-gauge"></i>
                   <span>{{ new_activities }}</span>
                 </a>
-              </li>#}
+              </li>
               {% block header_account_settings_link %}
                 <li>
                   <a href="{{ h.url_for('user.edit', id=c.userobj.name) }}" title="{{ _('Edit settings') }}">
-                    <i class="icon-cog"></i>
+                    <i class="fa-solid fa-gear"></i>
                   </a>
                 </li>
               {% endblock %}
               {% block header_account_log_out_link %}
                 <li>
                   <a href="{{ h.url_for('/user/_logout') }}" title="{{ _('Log out') }}">
-                    <i class="icon-signout"></i>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
                   </a>
                 </li>
               {% endblock %}
